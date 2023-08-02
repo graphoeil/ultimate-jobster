@@ -22,6 +22,7 @@ const AddJob = () => {
 	// If the user changes his city of residence (Profile.js),
 	// and then come to addJob we must update to have the new value
 	// First input (position) autofocus
+	const positionRef = useRef();
 	useEffect(() => {
 		// Only for creating a job
 		if (!isEditing){
