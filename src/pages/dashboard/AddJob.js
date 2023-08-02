@@ -14,25 +14,21 @@ const AddJob = () => {
 	const { isLoading, position, company, jobLocation, 
 		jobType, jobTypeOptions, status, statusOptions, 
 		isEditing, editJobId } = useSelector((store) => { return store.job; });
+	const { user } = useSelector((store) => { return store.user; });
 
 	// Dispatch
 	const dispatch = useDispatch();
 	
 	// If the user changes his city of residence (Profile.js),
 	// and then come to addJob we must update to have the new value
-	const { user } = useSelector((store) => { return store.user; });
+	// First input (position) autofocus
 	useEffect(() => {
 		// Only for creating a job
 		if (!isEditing){
+			positionRef.current.focus();
 			dispatch(handleChange({ name:'jobLocation', value:user.location }));
 		}
 	},[dispatch, isEditing, user]);
-
-	// First input (position) autofocus
-	const positionRef = useRef();
-	useEffect(() => {
-		positionRef.current.focus();
-	},[]);
 
 	// Inputs change
 	const handleJobInput = (e) => {
